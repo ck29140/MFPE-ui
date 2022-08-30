@@ -19,10 +19,12 @@ function Login() {
 
     
     
-    axios.get("http://localhost:5003/api/Authentication?Username=test&Password=Pass", loginPayload)
+    axios.get("http://localhost:5003/api/Authentication?Username=test&Password=Pass")
       .then(response => {
         //get token from response
         const token = response.data;
+
+        alert("Login Success");
 
         //set JWT token to local
         localStorage.setItem("token", token);
