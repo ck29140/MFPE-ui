@@ -1,51 +1,95 @@
-import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import React , {useState, useEffect} from 'react';
+import Table  from 'react-bootstrap/Table';
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import StockService from "./StockService";
 
+function ViewMedicineStock() {
+    // const[data , getData] = useState([]);
+    // let history = useHistory();
+    // useEffect(() =>{
+    //     const GetData = async () => {
+    //         StockService.getAllMedicine().then((result) => {
+    //             getData(result.data);
+    //         });
 
+    //     };
 
+    //     GetData();
 
+    // }, []);
 
-
-const ViewMedicineStock = () => {
-    const url = 'https://localhost:44338/api/MedicineStock'
+    const [post, setPost] = useState(null);
   
-    const [data, setData] = useState([])
-  
-    useEffect(() => {
-      axios.get(url).then(json => setData(json.data))
-    }, [])
-  
-    const renderTable = () => {
-      return data.map(user => {
-        return (
-          <tr>
-            <td>{user.name}</td>
-            <td>{user.chemicalComposition}</td>
-            <td>{user.targetAilment}</td> 
-            <td>{user.dateOfExpiry}</td> 
-            <td>{user.numberOfTabletsInStock}</td>
-          </tr>
-        )
-      })
-    }
-  
+    React.useEffect(() => {
+      axios.get("https://localhost:44338/api/MedicineStock").then((response) => {
+        setPost(response.data);
+      });
+    }, []);
+
+    console.log(post);
+
+
+    
+    
     return (
-      <div>
-        <h1 id="title">Medicine Stock Table</h1>
-        <table id="users">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Chemical Composition</th>
-              <th>Target Ailment</th>
-              <th>Date of Expiry</th>
-              <th>Number of Tablets In Stock</th>
-            </tr>
-          </thead>
-          <tbody>{renderTable()}</tbody>
-        </table>
-      </div>
-    )
+        <div>
+      
+      <center>
+        <h1>Student Details </h1>
+      </center>
+      <Table striped bordered hover variant="dark">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Chemical Composition</th>
+            <th>Target Ailment</th>
+            <th>Date Of Expiry</th>
+            <th>Number Of Tablets In Stock</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {post &&
+            post.length > 0 &&
+            post.map((item, idx) => {
+              return (
+                <tr key={idx}>
+                  <td>{item.name}</td>
+                  <td>{item.chemicalComposition}</td>
+                  <td>{item.targetAilment}</td>
+                  <td>{item.dateOfExpiry}</td>
+                  <td>{item.numberOfTabletsInStock}</td>
+                  
+
+                  </tr>
+              );
+            })}
+        </tbody>
+      </Table>
+    </div>
+    );
 }
 
 export default ViewMedicineStock;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
