@@ -30,7 +30,7 @@ function HomePage() {
 
   
   
-  const baseURL = "http://localhost:59839/api/MedicineStockInformation";
+  const baseURL = "https://medicinestockmicroservice20220831232750.azurewebsites.net/api/MedicineStockInformation";
   
   
  
@@ -52,10 +52,10 @@ function HomePage() {
     //     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
     //   );
     // };
-
+   
     const createScheduleClickHandler = () => {
       const formatttedDate =  moment(date).toISOString()
-      axios.get(`http://localhost:5001/api/RepSchedule?startDate=${formatttedDate}`)
+      axios.get(`https://medicalrepresentativeschedulemicroservice20220831231136.azurewebsites.net/api/RepSchedule?startDate=${formatttedDate}`)
       .then((res) => {
         console.log("sed list",res.data)
         setScheduleList(res.data)
@@ -66,7 +66,7 @@ function HomePage() {
     }
 
     const viewStockClickHandler = () => {
-      axios.get(`http://localhost:59839/api/MedicineStockInformation`)
+      axios.get(`https://medicinestockmicroservice20220831232750.azurewebsites.net/api/MedicineStockInformation`)
       .then((res) => {
         // console.log(res.data)
         setStockData(res?.data)
@@ -81,7 +81,7 @@ function HomePage() {
         "medicine": medicineName,
         "demandCount": demandCount
       }]
-      axios.post(`http://localhost:5002/api/PharmacySupply`, obj )
+      axios.post(`https://pharmacymedicinesupplymicroservice20220831235723.azurewebsites.net/api/PharmacySupply`, obj )
       .then((res)=> {
         console.log(res.data)
         setMedSupplyList(res.data)

@@ -24,10 +24,10 @@ function Login() {
 
     console.log("Username", username)
     console.log("Password", password)
-
+  
     
     
-    axios.get(`http://localhost:5003/api/Authentication?Username=${username}&Password=${password}`)
+    axios.get(` https://authapi3107.azurewebsites.net/api/Authentication?Username=${username}&Password=${password}`)
       .then(response => {
         //get token from response
         const token = response.data;
@@ -48,7 +48,7 @@ function Login() {
   };
 
   return (
-    <div className="login">al
+    <div className="login">
       <div className="flex-row align-items-center">
         <Container>
         <Row className="justify-content-center">
