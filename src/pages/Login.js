@@ -5,21 +5,29 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css"
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, Row } from 'reactstrap';
 import './mystyle.css'
+import { useState } from "react";
 
 
 
 function Login() {
 
+  const [userName, setUserName] = useState('')
+  const [password, setPassword] = useState('')
+
+
   const handleSubmit = (username, password) => {
     //reqres registered sample user
-    const loginPayload = {
-      username: 'test',
-      password: 'Pass'
-    }
+    // const loginPayload = {
+    //   username: 'test',
+    //   password: 'Pass'
+    // }
+
+    console.log("Username", username)
+    console.log("Password", password)
 
     
     
-    axios.get("http://localhost:5003/api/Authentication?Username=test&Password=Pass")
+    axios.get(`http://localhost:5003/api/Authentication?Username=${username}&Password=${password}`)
       .then(response => {
         //get token from response
         const token = response.data;
@@ -40,7 +48,7 @@ function Login() {
   };
 
   return (
-    <div className="login">
+    <div className="login">al
       <div className="flex-row align-items-center">
         <Container>
         <Row className="justify-content-center">
@@ -51,8 +59,7 @@ function Login() {
     <Form 
       onSubmit={(event) => {
         event.preventDefault()
-        const [username, password] = event.target.children;
-        handleSubmit(username, password);
+        handleSubmit(userName, password)
       }}
     >
       <div className="row mb-2 pageheading">
@@ -62,10 +69,10 @@ function Login() {
       <h2><span class="badge bg-info">Pharmacy Medicine Supply Management System</span></h2>
       <h3><span class="badge bg-success">Login</span></h3>
       <InputGroup className="mb-3">
-      <Input type="text" id="username" name="username" placeholder="Enter Username" />
+      <Input type="text" id="username" name="username" placeholder="Enter Username" value={userName} onChange={(e) => setUserName(e.target.value)} />
       </InputGroup>
       <InputGroup className="mb-4">
-      <Input type="password" id="password" name="password" placeholder="Enter Password" />
+      <Input type="password" id="password" name="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
       </InputGroup>
       <Button type="submit" value="Submit">Submit</Button>
       <p></p>

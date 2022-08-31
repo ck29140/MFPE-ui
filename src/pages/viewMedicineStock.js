@@ -2,7 +2,7 @@ import React , {useState, useEffect} from 'react';
 import Table  from 'react-bootstrap/Table';
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import StockService from "./StockService";
+import StockService from "./stockService";
 
 function ViewMedicineStock() {
     // const[data , getData] = useState([]);

@@ -8,7 +8,7 @@ import { history } from './helpers/history';
 //pages
 import HomePage from "./pages/HomePage"
 import LoginPage from "./pages/Login"
-import ViewMedicineStock from "./pages/ViewMedicineStock"
+import ViewMedicineStock from "./pages/viewMedicineStock"
 
 function Routes() {
     return (
