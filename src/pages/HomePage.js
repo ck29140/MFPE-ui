@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from 'react-router-dom'
+
 import "./mystyle.css";
 import "../App.css";
 import { Button, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, Row, Table } from 'reactstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
-import DatePicker from "react-datepicker";
+
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import TextField from '@material-ui/core/TextField';
 
-import MedicineStock from "./MedicineStock";
-import StockService from "./stockService";
-import { useHistory } from "react-router-dom";
+
 
 
 
@@ -174,7 +172,7 @@ console.log('med supplu list state', medSupplyList)
             <td>{item.name}</td>
             <td>{item.doctorname}</td>
             <td>{item.meetingSlot}</td> 
-            <td>{item.dateofmeeting}</td>
+            <td>{moment(item.dateofmeeting).format('MMMM Do YYYY')}</td>
             <td>{item.doctorContactnumber}</td>
             <td>{item.treatingAlignment}</td>
             <td>{item.medicine.join(', ')}</td>          
