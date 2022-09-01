@@ -6,6 +6,7 @@ import "../App.css"
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, Row } from 'reactstrap';
 import './mystyle.css'
 import { useState } from "react";
+import swal from "sweetalert";
 
 
 
@@ -32,7 +33,14 @@ function Login() {
         //get token from response
         const token = response.data;
 
-        alert("Login Success");
+        //alert("Login Success");
+
+        swal({
+          title: "Login Success",
+          text: "User authorised",
+          icon: "success",
+          timer: 60000
+        });
 
         //set JWT token to local
         localStorage.setItem("token", token);

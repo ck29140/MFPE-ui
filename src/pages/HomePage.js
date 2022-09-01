@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 import "./mystyle.css";
 import "../App.css";
-import { Button, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, Row, Table } from 'reactstrap';
+import { Button, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, Navbar, NavbarBrand, NavItem, Row, Table } from 'reactstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import TextField from '@material-ui/core/TextField';
+
 
 
 
@@ -26,22 +28,36 @@ function HomePage() {
 
   const [scheduleList, setScheduleList] = useState([])
 
+
+  
+  
+  
+
+  const token = localStorage.getItem(localStorage.key(0))
+  console.log(token)
+  const history=useHistory();
+  function logOut() {
+    localStorage.clear();
+    history.push('/');
+  }
+  
+
     
 
   
   
-  const baseURL = "https://medicinestockmicroservice20220831232750.azurewebsites.net/api/MedicineStockInformation";
+  //const baseURL = "https://medicinestockmicroservice20220831232750.azurewebsites.net/api/MedicineStockInformation";
   
   
  
-    const [post, setPost] = React.useState(null);
+    //const [post, setPost] = React.useState(null);
     
   
-    React.useEffect(() => {
-      axios.get(baseURL).then((response) => {
-        setPost(response.data);
-      });
-    }, []);
+    // React.useEffect(() => {
+    //   axios.get(baseURL).then((response) => {
+    //     setPost(response.data);
+    //   });
+    // }, []);
 
     //alert("Hi");
     //console.log(post);
@@ -95,7 +111,20 @@ console.log('med supplu list state', medSupplyList)
   
     return (
       <div className="HomePage">
-        <h1 ><span class="badge rounded-pill bg-primary">Dashboard</span></h1>
+        <Navbar  light expand="md">
+          <NavbarBrand style={{display: 'flex', justifyContent: 'flex-end'}}><h1 class="dashboard">Dashboard</h1></NavbarBrand>
+        </Navbar>
+        <Navbar  light expand="md">
+          <NavbarBrand color="#B9FFF8"><img alt = "logo" src="https://static2.bigstockphoto.com/5/6/3/large2/365322934.jpg" style={{
+          height: 75,
+          width: 75
+        }} />Pharmacy Medicine Supply Management System</NavbarBrand>
+          <NavbarBrand color="#B9FFF8"><Button id="btn3" style={{display: 'flex', justifyContent: 'top'}} type="button" color="success" onClick={viewStockClickHandler} >View Medicine Stock</Button></NavbarBrand>
+            <Button style={{display: 'flex', justifyContent: 'flex-end'}} color="danger" onClick={logOut}>Log Out</Button>
+          
+        </Navbar>
+        
+        
           <Container>
             <Row className="justify-content-center">
               <Col md="9" lg="7" xl="6">
@@ -107,7 +136,7 @@ console.log('med supplu list state', medSupplyList)
           <div className="row mb-2 pageheading">
           <div className="col-sm-12"></div>
           </div>
-          <Button type="button" color="success" onClick={viewStockClickHandler} >View Medicine Stock</Button>
+          {/* <Button id="btn3" style={{display: 'flex', justifyContent: 'top'}} type="button" color="success" onClick={viewStockClickHandler} >View Medicine Stock</Button> */}
           <br /><br />
           <InputGroup className="mb-3">
           <Input type="text" id="" name="" placeholder="Enter Medicine Name" class="form-control" value={medicineName} onChange={(e) => {setMedicineName(e.target.value)}}/>
@@ -118,19 +147,7 @@ console.log('med supplu list state', medSupplyList)
           <Button className="btn1" color="success" onClick={handleMedicineSupply}>Medicine Supply</Button>
           <br />
           <br/>
-          <h1 ><span class="badge rounded-pill bg-secondary">Medical Representative Schedule</span></h1>
-      <TextField
-        id="date"
-        label="Create Schedule"
-        type="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-
-<Button type="button"  color="success" onClick={createScheduleClickHandler}>Create Schedule</Button><br />
+          
           
           
           
@@ -149,7 +166,21 @@ console.log('med supplu list state', medSupplyList)
           </CardGroup>
           </Col>
           </Row>
+        <Container>
 
+        <h1 ><span class="badge rounded-pill bg-secondary">Medical Representative Schedule</span></h1>
+      <TextField
+        id="date"
+        label="Create Schedule"
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+
+<Button type="button"  color="success" onClick={createScheduleClickHandler}>Create Schedule</Button><br />
           {scheduleList.length > 0 && <h3>Schedule List</h3>}
           {scheduleList.length > 0 && <Button  color="danger" onClick={()=>setScheduleList([])}>Close</Button>}
           {scheduleList.length > 0 && <Table striped bordered >
@@ -182,6 +213,11 @@ console.log('med supplu list state', medSupplyList)
           
         </tbody>
             </Table>}
+
+            </Container>
+            
+
+            <Container>
 
 
           {medSupplyList.length> 0 &&
@@ -244,6 +280,8 @@ console.log('med supplu list state', medSupplyList)
           
         </tbody>
             </Table>}
+
+            </Container>
          
           </Container>
           
