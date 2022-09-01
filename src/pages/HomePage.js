@@ -107,7 +107,7 @@ console.log('med supplu list state', medSupplyList)
           <div className="row mb-2 pageheading">
           <div className="col-sm-12"></div>
           </div>
-          <Button type="button" onClick={viewStockClickHandler} >View Medicine Stock</Button>
+          <Button type="button" color="success" onClick={viewStockClickHandler} >View Medicine Stock</Button>
           <br /><br />
           <InputGroup className="mb-3">
           <Input type="text" id="" name="" placeholder="Enter Medicine Name" class="form-control" value={medicineName} onChange={(e) => {setMedicineName(e.target.value)}}/>
@@ -115,7 +115,7 @@ console.log('med supplu list state', medSupplyList)
           <InputGroup className="mb-3">
           <Input type="number" id="" name="u" placeholder="Enter Demand Count" class="form-control" value={demandCount} onChange={(e) => {setdemandCount(e.target.value)}}/>
           </InputGroup>
-          <Button className="btn1" onClick={handleMedicineSupply}>Medicine Supply</Button>
+          <Button className="btn1" color="success" onClick={handleMedicineSupply}>Medicine Supply</Button>
           <br />
           <br/>
           <h1 ><span class="badge rounded-pill bg-secondary">Medical Representative Schedule</span></h1>
@@ -130,7 +130,7 @@ console.log('med supplu list state', medSupplyList)
         }}
       />
 
-<Button type="button" onClick={createScheduleClickHandler}>Create Schedule</Button><br />
+<Button type="button"  color="success" onClick={createScheduleClickHandler}>Create Schedule</Button><br />
           
           
           
@@ -151,7 +151,7 @@ console.log('med supplu list state', medSupplyList)
           </Row>
 
           {scheduleList.length > 0 && <h3>Schedule List</h3>}
-          {scheduleList.length > 0 && <Button onClick={()=>setScheduleList([])}>Close</Button>}
+          {scheduleList.length > 0 && <Button  color="danger" onClick={()=>setScheduleList([])}>Close</Button>}
           {scheduleList.length > 0 && <Table striped bordered >
             <thead>
           <tr>
@@ -187,7 +187,7 @@ console.log('med supplu list state', medSupplyList)
           {medSupplyList.length> 0 &&
           <h3>Medicine Supply List</h3>}
           {medSupplyList.length> 0 &&
-          <Button onClick={()=>setMedSupplyList([])}>Close</Button>}
+          <Button color="danger" onClick={()=>setMedSupplyList([])}>Close</Button>}
 
           {medSupplyList.length> 0 && <Table striped bordered>
             <thead>
@@ -215,7 +215,7 @@ console.log('med supplu list state', medSupplyList)
           {stockData.length> 0 &&
           <h3>Medicine Stock</h3>}
           {stockData.length> 0 &&
-          <Button onClick={()=>setStockData([])}>Close</Button>}
+          <Button   color="danger" onClick={()=>setStockData([])}>Close</Button>}
           {stockData.length> 0 && <Table striped bordered>
             <thead>
           <tr>
