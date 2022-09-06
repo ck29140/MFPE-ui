@@ -24,7 +24,15 @@ h1.dashboard{
     text-shadow: 3px 1px green;
 
 }
+h1.title
+{
+    color: #2E0249;
+    justify-content: center;
+    font-family: cursive;
+    text-align: center;
+    text-shadow: 3px 1px #2E0249;
 
+}
 .btn1 {
     padding-left: 10px;
     padding-right: 50px;

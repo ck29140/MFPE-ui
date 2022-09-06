@@ -116,9 +116,10 @@ console.log('med supplu list state', medSupplyList)
         </Navbar>
         <Navbar  light expand="md">
           <NavbarBrand color="#B9FFF8"><img alt = "logo" src="https://static2.bigstockphoto.com/5/6/3/large2/365322934.jpg" style={{
-          height: 75,
-          width: 75
-        }} />Pharmacy Medicine Supply Management System</NavbarBrand>
+          height: 150,
+          width: 150
+        }} /></NavbarBrand>
+        <NavbarBrand><h1 class="title">Pharmacy Medicine Supply Management System</h1></NavbarBrand>
           <NavbarBrand color="#B9FFF8"><Button id="btn3" style={{display: 'flex', justifyContent: 'top'}} type="button" color="success" onClick={viewStockClickHandler} >View Medicine Stock</Button></NavbarBrand>
             <Button style={{display: 'flex', justifyContent: 'flex-end'}} color="danger" onClick={logOut}>Log Out</Button>
           
