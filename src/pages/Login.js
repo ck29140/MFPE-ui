@@ -14,6 +14,9 @@ function Login() {
 
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
+  const [errorMsg, setErrorMsg] = useState('')
+
+  
 
 
   const handleSubmit = (username, password) => {
@@ -28,21 +31,34 @@ function Login() {
   
     
     
-    axios.get(` https://authapi3107.azurewebsites.net/api/Authentication?Username=${username}&Password=${password}`)
+    axios.get(`http://localhost:5003/api/Authentication?Username=${username}&Password=${password}`)
       .then(response => {
         //get token from response
-        const token = response.data;
+        
+        
+        if(response.status === 204){
+          //alert("Invalid Credentials")
+          swal({
+            title: "Login Error",
+            text: "User Unauthorised",
+            icon: "error",
+            timer: 60000
+          });
 
-        //alert("Login Success");
+        }
 
-        swal({
-          title: "Login Success",
-          text: "User authorised",
-          icon: "success",
-          timer: 60000
-        });
+        else
+        {
+          const token = response.data;
 
-        //set JWT token to local
+          swal({
+            title: "Login Success",
+            text: "User authorised",
+            icon: "success",
+            timer: 60000
+          });
+          
+          //set JWT token to local
         localStorage.setItem("token", token);
 
         //set token to axios common header
@@ -50,6 +66,21 @@ function Login() {
 
         //redirect user to home page
         window.location.href = '/'
+
+
+
+        }
+
+        
+
+
+        
+
+        //alert("Login Success");
+
+        
+
+        
 
       })
       .catch(err => console.log(err));

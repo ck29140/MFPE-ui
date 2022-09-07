@@ -10,6 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import TextField from '@material-ui/core/TextField';
+import swal from "sweetalert";
 
 
 
@@ -39,6 +40,7 @@ function HomePage() {
   function logOut() {
     localStorage.clear();
     history.push('/');
+    window.location.reload();
   }
   
 
@@ -70,10 +72,12 @@ function HomePage() {
     // };
    
     const createScheduleClickHandler = () => {
-      const formatttedDate =  moment(date).toISOString()
-      axios.get(`https://medicalrepresentativeschedulemicroservice20220831231136.azurewebsites.net/api/RepSchedule?startDate=${formatttedDate}`)
+      const formatttedDate =  moment(date).add(1,'d').toISOString()
+      console.log(formatttedDate)
+      axios.get(`http://localhost:5001/api/RepSchedule?startDate=${formatttedDate}`)
       .then((res) => {
         console.log("sed list",res.data)
+        console.log(formatttedDate)
         setScheduleList(res.data)
       })
       .catch((err) => {
@@ -82,7 +86,7 @@ function HomePage() {
     }
 
     const viewStockClickHandler = () => {
-      axios.get(`https://medicinestockmicroservice20220831232750.azurewebsites.net/api/MedicineStockInformation`)
+      axios.get(`https://localhost:44338/api/MedicineStock`)
       .then((res) => {
         // console.log(res.data)
         setStockData(res?.data)
@@ -97,12 +101,24 @@ function HomePage() {
         "medicine": medicineName,
         "demandCount": demandCount
       }]
-      axios.post(`https://pharmacymedicinesupplymicroservice20220831235723.azurewebsites.net/api/PharmacySupply`, obj )
-      .then((res)=> {
-        console.log(res.data)
-        setMedSupplyList(res.data)
+      axios.post(`http://localhost:5002/api/PharmacySupply`, obj )
+      .then((response)=> {
+
+        
+        if(response.status === 500)
+        {
+          alert("Medicine Not Found!!!")
+          console.log('500 error')
+        }
+
+        else
+        {
+          console.log(response.data)
+          setMedSupplyList(response.data)
+        }
+        
       })
-      .catch((err) => console.log(err))
+      .catch((err) => swal('Error', 'Medicine Not Found' ,'error'))
     }
 
 console.log('stock data state', stockData )
@@ -139,6 +155,8 @@ console.log('med supplu list state', medSupplyList)
           </div>
           {/* <Button id="btn3" style={{display: 'flex', justifyContent: 'top'}} type="button" color="success" onClick={viewStockClickHandler} >View Medicine Stock</Button> */}
           <br /><br />
+
+          
           <InputGroup className="mb-3">
           <Input type="text" id="" name="" placeholder="Enter Medicine Name" class="form-control" value={medicineName} onChange={(e) => {setMedicineName(e.target.value)}}/>
           </InputGroup>
