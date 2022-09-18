@@ -1,10 +1,12 @@
+
 .HomePage {
     padding-top: 10px;
     padding-bottom: 15px;
     background-image: url('../Assets/doc3.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: center fixed;
     background-repeat: no-repeat;
+    height: '100vh';
 }
 
 .login {
