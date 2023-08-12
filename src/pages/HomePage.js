@@ -115,7 +115,7 @@ function HomePage() {
         
         if(response.status === 500)
         {
-          alert("Please enter a valid medicine name and demand")
+          alert("Please enter a valid medicine name and demand, ok ck")
           console.log('500 error')
           
         }
